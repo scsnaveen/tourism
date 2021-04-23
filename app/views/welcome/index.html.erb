@@ -1,0 +1,11 @@
+<div class="container">
+<%if current_user.present?%>
+<br>
+<%= image_tag current_user.image,style: "width: 250px; display: block"%>
+<br>
+<%= current_user.avatar_file_name%>
+<%else%>
+<h1>Welcome!</h1>
+<h4>To see the nature of life</h4>
+<%end%>
+</div>
