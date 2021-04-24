@@ -5,5 +5,10 @@ Rails.application.routes.draw do
 	}
 	get 'welcome/index'
 	root 'welcome#index'
+	get 'users/show'
+	get 'users/edit'
+	put 'users/update_profile_pic'
+	get 'users/update_profile_pic'
+	get 'users/secure_image'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

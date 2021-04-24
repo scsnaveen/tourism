@@ -1,0 +1,7 @@
+<div class="container">
+<br>
+<%= image_tag current_user.image,style: "width: 250px; display: block"%>
+<br>
+<%#= image_tag current_user.user.avatar_file_name,style: "width: 250px; display: block"%>
+<%= link_to image_tag(current_user.avatar.path, class: 'media-object'), current_user.avatar.path, target: '_blank' %>
+</div>

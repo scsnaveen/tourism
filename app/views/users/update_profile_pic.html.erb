@@ -1,0 +1,35 @@
+
+
+<%= form_for @user ,url:users_update_profile_pic_path,method: :put, multipart: true  do |f|%>
+<div class="row">
+	<div class="col-4">
+<h3>update profile pic 1</h3>
+<%=image_tag @user.image,style: "width: 250px; display: block"%>
+<%= f.file_field :image%>
+</div>
+<div class="col-4">
+<h3>update profile pic 2</h3>
+<%= link_to image_tag(@user.avatar.path, class: 'media-object'), @user.avatar.path, target: '_blank',method: :get %>
+<%= image_tag @user.avatar.path ,style: "width: 250px; display: block"%>
+<%#= URI.parse("http://something.com/blah/avatar.png").open%>
+<%#= Paperclip.io_adapters.for(@user.avatar).open%>
+<%#= image_tag(@user.avatar.path) %>
+<%#= asset_url(@user.avatar_file_name, @user.avatar.path)%>
+<%=link_to image_tag(users_secure_image_path),users_secure_image_path %>
+
+
+<br>
+<%#= f.country_select :first_name%>
+<%= f.file_field :avatar%>
+</div>
+</div>
+<%#= f.select :first_name, collection: CountryStateSelect.countries_collection %>
+
+<%#= options = { form: f, field_names: { :country => :first_name, :state => :last_name } }
+
+f.select :last_name, CountryStateSelect.state_options(options) %>
+<div>
+<%= f.submit "submit",class: "btn btn-success"%>
+</div>
+<%end%>
+
