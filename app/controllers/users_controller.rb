@@ -17,8 +17,9 @@ class UsersController < ApplicationController
 			@user.save!
 		end
 	end
-	def secure_image
-  send_file @user.avatar.path
+	
+def secure_image
+  send_file current_user.avatar.path
 end
 	def set_user
 		@user = User.find(current_user.id)

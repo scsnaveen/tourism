@@ -61,5 +61,6 @@ gem "font-awesome-rails"
 gem 'sidekiq'
 gem "paperclip", "~> 6.0.0"
 gem 'country_state_select'
+gem 'geocoder'
 
 # gem 'bootstrap-sass'

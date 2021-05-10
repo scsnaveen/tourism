@@ -1,0 +1,15 @@
+<div class="container">
+<div class="card-deck">
+<% @places.each do |place|%>
+
+<div class="card" style="width: 18rem;">
+	<div class="card-header bg-transparent border-success"><%=Country.find(place.country_id).country%></div>
+  <div class="card-body">
+    <h5 class="card-title"><%= place.place_name%></h5>
+    <p class="card-text"><%= place.place_description[0..75]%></p>
+  </div>
+</div>
+<br>
+<%end%>
+</div>
+</div>

@@ -1,0 +1,10 @@
+<%=form_with(url: places_create_path, method: "post") do |form|%>
+  <%= form.collection_select :country_id, Country.order(:country),:id,:country %>
+<div>
+<%=form.text_field :place_name,placeholder:"place name"%>
+</div>
+<div>
+<%=form.text_area :place_description,placeholder:"place description"%>
+</div>
+<%=form.submit "submit",class:"btn btn-success" %>
+<%end%>

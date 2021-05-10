@@ -20,7 +20,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render 'new'
     end
   end
-
+ def build_resource(hash={})
+    super(hash.merge(ip_address: request.location))
+  end
   # GET /resource/edit
   # def edit
   #   super
