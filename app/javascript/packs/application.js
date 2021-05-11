@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require('jquery')
-
+ //= require chosen-jquery
 //= require jquery3
 //= require popper
 Rails.start()

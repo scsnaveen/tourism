@@ -62,5 +62,9 @@ gem 'sidekiq'
 gem "paperclip", "~> 6.0.0"
 gem 'country_state_select'
 gem 'geocoder'
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'searchkick'
+gem 'currencies'
+gem 'money'
 # gem 'bootstrap-sass'

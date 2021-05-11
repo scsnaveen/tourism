@@ -1,0 +1,32 @@
+
+<%= form_for :search_places, url: search_places_path, method: :get do |form| %>
+  <%= form.text_field :query, value: params[:search_places].presence && params[:search_places][:query] %>
+  <%= form.submit 'Search' %>
+<% end %>
+<% unless @places.nil? %>
+  <% if @places.empty? %>
+    <h2>No places found matching your query.</h2>
+  <% else %>
+    <h2>Search results</h2>
+
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>place</th>
+           <th>description</th>
+           <th>country</th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @places.each do |place| %>
+          <tr>
+            <td><%= place.place_name %></td>
+            <td><%= place.place_description %></td>
+            <td><%= place.country %></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% end %>
+<% end %>

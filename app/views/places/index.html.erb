@@ -1,15 +1,20 @@
 <div class="container">
-<div class="card-deck">
-<% @places.each do |place|%>
-
-<div class="card" style="width: 18rem;">
-	<div class="card-header bg-transparent border-success"><%=Country.find(place.country_id).country%></div>
-  <div class="card-body">
-    <h5 class="card-title"><%= place.place_name%></h5>
-    <p class="card-text"><%= place.place_description[0..75]%></p>
-  </div>
-</div>
-<br>
-<%end%>
-</div>
+	<div class="row">  
+		<% @places.each do |place|%>
+		<div class="card-columns">
+		<div class="card p-3">
+		<div class="card-header bg-transparent border-success"><%= @place = place.country%></div>
+		<div class="card-body">
+		<h5 class="card-title"><%= place.place_name%></h5>
+		<p class="card-text"><%= place.place_description[0..75]%>
+			<%=form_with(url: places_distance_path(:city2=>@place), method: "post") do |form|%>
+				<%= form.select :city1,place:CS.cities(:AP,:IN)%>
+				<%=form.submit%>
+			<%end%>
+		</p>
+		</div>
+		</div>
+		</div>
+		<%end%>
+	</div>
 </div>
