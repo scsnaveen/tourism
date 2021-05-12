@@ -16,17 +16,20 @@ Rails.application.routes.draw do
 	end
 	get 'countries/new'
 	post 'countries/create'
-	# get 'places/new'
-	# post 'places/create'
-	# get 'places/index'
+	get 'places/new'
+	post 'places/create'
+	get 'places/index'
 	get 'places/distance'
 	post 'places/distance'
-	get 'places/conversion'
-	post 'places/conversion'
-	resources :places do
+	resources :places,only:[:search] do
 	  collection do
 	    get :search
 	  end
 	end
+	get 'packages/new'
+	post 'packages/create'
+	get 'packages/index'
+	get 'packages/conversion'
+	post 'packages/conversion'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

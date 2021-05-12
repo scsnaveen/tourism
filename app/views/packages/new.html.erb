@@ -1,0 +1,11 @@
+<%=form_with(url: packages_create_path, method: "post") do |form|%>
+  <%= form.country_select :country %>
+
+<div>
+<%=form.select :package_places,options_from_collection_for_select(Place.all, 'place_name', 'place_name'),{},{:multiple => true,:size=>3}%>
+</div>
+<div>
+<%=form.text_field :price,placeholder:"price"%>
+</div>
+<%=form.submit "submit",class:"btn btn-success" %>
+<%end%>

@@ -1,0 +1,24 @@
+<div class="container">
+<div class="card-group">
+	<%@packages.all.each do |package|%>
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text">
+				<ul class="list-group">
+				<% package.package_places.each do |place|%>
+					<li class="list-group-item"><%=place%></li>
+				<%end%>
+			</ul>
+			<br>
+			<button type="button" class="btn btn-success float-right"disabled ><%=package.price%></button>
+			<%=link_to "conversion",packages_conversion_path(:id=>package.id)%>
+			<%#=form_with(url: packages_conversion_path(:id=>package.id), method: "post") do |form|%>
+					<%#= form.select :currency,currency: Country.all.each( {|q| @curr = q.currency} ),'@curr','@curr' %>
+					<%#=form.submit%>
+				<%#end%>
+			</p>
+		</div>
+	</div>
+	<%end%>
+</div>
+</div>

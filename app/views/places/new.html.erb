@@ -1,5 +1,7 @@
-<%=form_with model: @place do |form|%>
-<%= form.select :country, collection: CountryStateSelect.countries_collection %>
+<%=form_with(url: places_create_path, method: "post") do |form|%>
+<%#= form.select :country, collection: CountryStateSelect.countries_collection %>
+  <%= form.country_select :country %>
+
 <div>
 <%=form.text_field :place_name,placeholder:"place name"%>
 </div>
