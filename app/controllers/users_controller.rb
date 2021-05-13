@@ -17,6 +17,13 @@ class UsersController < ApplicationController
 			@user.save!
 		end
 	end
+	def states
+		@states = CS.states(params[:country])
+    	respond_to do |format|
+			format.html
+			format.json {render :json=>@result}
+		end
+	end
 	
 def secure_image
   send_file current_user.avatar.path

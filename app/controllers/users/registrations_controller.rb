@@ -6,11 +6,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+        @states = CS.states(params[:country])
+
     @user = User.new
   end
 
   # POST /resource
   def create
+        @states = CS.states(params[:country])
     @user = User.new(sign_up_params)
     @user.avatar = params[:user][:avatar]
     if @user.save

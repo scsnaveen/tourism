@@ -1,34 +1,68 @@
 <div class="container">
 
-<form class="form-inline my-2 my-lg-0">
-      <%= form_for :search_places, url: search_places_path, method: :get do |form| %>
-        <%= form.text_field :query, value: params[:search_places].presence && params[:search_places][:query],class:"form-control mr-lg-8",placeholder:"search" %>
-        <%= form.submit 'Search',class:"btn btn-outline-success my-2 my-sm-0" %>
-      <% end %>
-    </form>
-    <br>
+	<form class="form-inline my-2 my-lg-0">
+		<%= form_for :search_places, url: search_places_path, method: :get do |form| %>
+			<%= form.text_field :query, value: params[:search_places].presence && params[:search_places][:query],class:"form-control mr-lg-8",placeholder:"search" %>
+			<%= form.submit 'Search',class:"btn btn-outline-success my-2 my-sm-0" %>
+		<% end %>
+	</form>
+
+	<br>
+
 	<div class="row">
 		<div class="col">
-	<% if @places.empty? %>
-		<h2>No places found matching your query.</h2>
-	<% else %>
-		<% @places.each do |place|%>
-		<div class="card-columns">
-		<div class="card p-3">
-		<div class="card-header bg-transparent border-success"><%= @place = place.country%></div>
-			<div class="card-body">
-			<h5 class="card-title"><%= place.place_name%></h5>
-			<p class="card-text"><%= place.place_description[0..75]%>
-				<%=form_with(url: places_distance_path(:city2=>@place), method: "post") do |form|%>
-					<%= form.select :city1,place:CS.states(:IN).values%>
-					<%=form.submit "submit",class:"btn btn-sm btn-info"%>
+			<% if @places.empty?  %>
+				<h2>No places found matching your query.</h2>
+			<% else %>
+				<% @places.each do |place|%>
+				<div class="card-columns">
+				<div class="card p-3">
+				<div class="card-header bg-transparent border-success">
+					<%@place = place.country%>
+					<%= @place%></div>
+					<div class="card-body">
+					<h5 class="card-title"><%= place.place_name%></h5>
+					<p class="card-text"><%= place.place_description[0..75]%>
+						<%#=form_with(url: places_distance_path(:city2=>@place), method: "post") do |form|%>
+							<%#=form.submit "calculate distance",class:"btn btn-sm btn-info"%>
+						<%#end%></p>
+						<p class="card-text">
+						<%= link_to "distance",places_distance_path(:city2=>@place),class:"submit btn btn-info",:onsubmit=>"myFunction()"%>
+					</p>
+					<form >
+						<input type="submit" value="Submit" onsubmit="myFunction()">
+						<p id="result">the value is
+					<%#= render :partial => 'places/distance' %>
+					</p>
+					</form>
+
+					
+					
+					</div>
+				</div>
+				</div>
 				<%end%>
-			</p>
-			</div>
+			<%end%>
 		</div>
-		</div>
-		<%end%>
-	<%end%>
 	</div>
 </div>
-</div>
+<script type="text/javascript">
+	function myFunction() {
+		var city1 = "<%=current_user.state%>";
+}
+
+$(document).submit(function() {
+	alert("<%=@place%>")
+		$.ajax({    
+		type: "GET",
+		url: "distance",
+		dataType: "json",
+		data: {"city2": "<%=@place%>"},
+		success: function(response){ 
+			var obj = JSON.stringify(response);
+			alert(obj)
+		 $("#result").html(`<%= render partial: 'distance' %>`) 
+		}
+	});
+});
+</script>

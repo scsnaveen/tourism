@@ -1,4 +1,5 @@
 class PlacesController < ApplicationController
+	before_action :authenticate_user! ,except: [:index]
 	def new
 		@place = Place.new
 	end
@@ -10,17 +11,23 @@ class PlacesController < ApplicationController
 	end
 	def index
 		query = params[:search_places].presence && params[:search_places][:query]
-		if query
+		if query !=nil
 			# @places =Place.search(query)
 			@places = Place.__elasticsearch__.search(query).records
 		else
 			@places = Place.all
 		end
+
 	end
 	def distance
-		@city1 = params[:city1]
+		@city1 = current_user.state
 		@city2 = params[:city2]
 		@distance = Geocoder::Calculations.distance_between(@city1,@city2)
+		puts @distance.inspect
+		respond_to do |format|
+			format.json {render :json=>@distance}
+			format.html {render @places}
+		end
 	end
 	def search
   	query = params[:search_places].presence && params[:search_places][:query]

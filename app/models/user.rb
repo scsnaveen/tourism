@@ -10,6 +10,8 @@ class User < ApplicationRecord
    validates :first_name, presence: true,format: { with: /\A[a-zA-Z]+\z/,message: "Please enter valid first name" }
    validates :last_name,presence: true,format: { with: /\A[a-zA-Z]+\z/,message: "Please enter valid last name" }
    validates :phone_number,numericality: { only_integer: true },presence: true,length: { minimum:6,maximum:10  }
+   validates :country, presence: true
+   validates :state, presence: true
       attr_accessor :avatar
 	 has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
     validates_attachment :avatar, presence: true

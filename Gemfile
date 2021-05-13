@@ -57,6 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'simple_form'
 gem "font-awesome-rails"
 gem 'sidekiq'
 gem "paperclip", "~> 6.0.0"
@@ -69,5 +70,7 @@ gem 'money'
 gem 'country-select'
 gem 'concurrency'
 gem 'country_with_currency'
+gem 'currency_select'
+
 
 # gem 'bootstrap-sass'

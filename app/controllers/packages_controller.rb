@@ -12,7 +12,8 @@ class PackagesController < ApplicationController
 	end
 	def conversion
 		@package = Package.find(params[:id])
-		@money = Money.us_dollar(@package.price).exchange_to("EUR")
+		Money.add_rate("USD", params[:currency], ConversionRate.where(currency_code: params[:currency]).first.conversion_rate)
+		@money = Money.us_dollar(@package.price).exchange_to(params[:currency])
 	end
 	private
 	def package_params
