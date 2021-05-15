@@ -21,7 +21,6 @@ Rails.application.routes.draw do
 	post 'places/create'
 	get 'places/index'
 	get 'places/distance'
-	post 'places/distance'
 	resources :places,only:[:search] do
 	  collection do
 	    get :search
@@ -31,6 +30,5 @@ Rails.application.routes.draw do
 	post 'packages/create'
 	get 'packages/index'
 	get 'packages/conversion'
-	post 'packages/conversion'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

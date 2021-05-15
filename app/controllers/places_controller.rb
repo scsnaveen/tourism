@@ -23,10 +23,10 @@ class PlacesController < ApplicationController
 		@city1 = current_user.state
 		@city2 = params[:city2]
 		@distance = Geocoder::Calculations.distance_between(@city1,@city2)
+		puts @city2.inspect
 		puts @distance.inspect
 		respond_to do |format|
 			format.json {render :json=>@distance}
-			format.html {render @places}
 		end
 	end
 	def search

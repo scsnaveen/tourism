@@ -14,6 +14,9 @@ class PackagesController < ApplicationController
 		@package = Package.find(params[:id])
 		Money.add_rate("USD", params[:currency], ConversionRate.where(currency_code: params[:currency]).first.conversion_rate)
 		@money = Money.us_dollar(@package.price).exchange_to(params[:currency])
+		respond_to do |format|
+			format.json {render :json=>@money.cents}
+		end
 	end
 	private
 	def package_params

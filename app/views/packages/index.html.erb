@@ -1,6 +1,9 @@
 <div class="container">
 <div class="card-group">
 	<%@packages.all.each do |package|%>
+	<div class="id">
+	<%@@id = package.id%>
+</div>
 	<div class="card">
 		<div class="card-body">
 			<p class="card-text">
@@ -13,8 +16,11 @@
 			<button type="button" class="btn btn-success float-right"disabled ><%=package.price%></button>
 			<%#=link_to "conversion",packages_conversion_path(:id=>package.id)%>
 			<%=form_with(url: packages_conversion_path(:id=>package.id), method: "post") do |form|%>
-					<%= form.currency_select(:currency, ["USD", "EUR", "CAD"], {}, {class: "form-control"}) %>
-
+			<div id="currency1">
+					<%= form.currency_select(:currency,["USD", "EUR", "CAD"], {}, {class: "form-control currency1"}) %>
+					<%#=country_select("user", "country", selected: ["USD", "EUR", "CAD"])%>
+				</div>
+					<p id=result></p>
 					<%=form.submit "conversion"%>
 				<%end%>
 			</p>
@@ -23,3 +29,26 @@
 	<%end%>
 </div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	$('#currency').change(function() {
+		var state = $('.currency1').val();
+		alert(state)
+			$.ajax({
+				url: "conversion?id="+<%=@@id%>, 
+				type: 'GET',
+				data: {
+					 "currency": $(".currency1").val()
+				 },
+				 dataType: "json",
+				 success: function(response){
+						var obj = JSON.stringify(response);
+						alert(obj)
+						$("#result").html(obj)
+				 }
+			 });
+		});
+	});
+	
+</script>
