@@ -11,71 +11,25 @@
 
 	<div class="row">
 		<div class="col">
-			<% if @places.empty?  %>
+			<% if params[:search_places].present? && params[:search_places]!=nil  %>
 				<h2>No places found matching your query.</h2>
 			<% else %>
 				<div class="card-columns">
 				<% @places.each do |place|%>
-				<div class="card p-3">
+				<div class="card p-3 divname">
 				<div class="card-header bg-transparent border-success">
-					<%@place = place.country%>
-					<div id="demo"> <%= @place%>						
-					</div>
+						<%= place.country%>
 					</div>
 					<div class="card-body">
 					<h5 class="card-title"><%= place.place_name%></h5>
-					<p class="card-text"><%= place.place_description[0..75]%>
-						<%#=form_with(url: places_distance_path(:city2=>@place), method: "post") do |form|%>
-							<%#=form.submit "calculate distance",class:"btn btn-sm btn-info"%>
-						<%#end%></p>
-						<button id="button1">Calulate Distance</button>
-						<p id="result"></p>
+					<p class="card-text"><%= place.place_description[0..75]%></p>
+							<%=link_to "show details",places_show_path(:id=>place.id),class:"btn btn-info "%>
 					</div>
 				</div>
-				<%end%>
+					<%end%>
 				</div>
 			<%end%>
 		</div>
 	</div>
-</div>
-				
-<script type="text/javascript">
-// 	$(document).ready(function(){
-//     $("form").submit(function(){
-//     	alert("the value is")
-// 	var array = $("divname").val()
-// 	console.log(array)
-// 	alert(array)
-// })
-// }) 
+</div>			
 
- 
-// var names = $(".divname").map(function() {
-//   return $(this).text();
-// }).get();
-// console.log(names); 
-// alert(names)
-//         });
-// 	card_value = $(array[i]).val();
-// $(document).ready(function() {
-//    $("#button1").click(function() {
-//      var res = $('#demo').text();
-//      $('#val').html(res);
-//    });
-// });
-$(document).ready(function() {
-	$("#button1").click(function() {
-		var res = $('#demo').text();
-		$.ajax({    
-		type: "GET",
-		url: "distance",
-		dataType: "json",
-		data: {"city2": "<%=@place%>"},
-		success: function(response){ 
-			var obj = JSON.stringify(response);
-			$("#result").html(obj) 
-		}
-	});
-});
- });
-</script>

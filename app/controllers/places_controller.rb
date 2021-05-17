@@ -36,6 +36,9 @@ class PlacesController < ApplicationController
 	    @places = Place.__elasticsearch__.search(query).records
 		end
 	end
+	def show
+		@place= Place.find(params[:id])
+	end
 
 	private
 

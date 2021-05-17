@@ -1,0 +1,25 @@
+<div class="container">
+<h1 center><%=@place.country%></h1>
+<h4><%=@place.place_name%></h4>
+<p><%=@place.place_description%></p>
+<button id="button1">calculate Distance</button>
+<p id="result"></p>
+
+</div>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#button1").click(function() {
+		$.ajax({    
+		type: "GET",
+		url: "distance",
+		dataType: "json",
+		data: {"city2": "<%=@place.country%>"},
+		success: function(response){ 
+			var obj = JSON.stringify(response);
+			$("#result").html("<h3>The distance is "+obj+ "KM</h3>")
+		}
+	});
+});
+ });
+</script>

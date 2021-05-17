@@ -18,6 +18,9 @@ class PackagesController < ApplicationController
 			format.json {render :json=>@money.cents}
 		end
 	end
+	def show
+		@package= Package.find(params[:id])
+	end
 	private
 	def package_params
 		params.permit(:package_places,:price)
