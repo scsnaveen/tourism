@@ -1,8 +1,8 @@
 	require "open-uri"
 
 class UsersController < ApplicationController
-	before_action :authenticate_user!
-	before_action :set_user
+	before_action :authenticate_user!, except:[:states]
+	before_action :set_user, except:[:states]
 	def show
 	end
 	def update_profile_pic
@@ -18,10 +18,11 @@ class UsersController < ApplicationController
 		end
 	end
 	def states
+		puts "--------"
 		@states = CS.states(params[:country])
+		puts @states
     	respond_to do |format|
-			format.html
-			format.json {render :json=>@result}
+			format.js {render :json=>@states}
 		end
 	end
 	

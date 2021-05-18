@@ -11,7 +11,7 @@
 
 	<div class="row">
 		<div class="col">
-			<% if params[:search_places].present? && params[:search_places]!=nil  %>
+			<% if @places.empty?  %>
 				<h2>No places found matching your query.</h2>
 			<% else %>
 				<div class="card-columns">

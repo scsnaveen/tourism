@@ -65,12 +65,16 @@ gem 'country_state_select'
 gem 'geocoder'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem 'currencies'
 gem 'money'
 gem 'country-select'
 gem 'concurrency'
 gem 'country_with_currency'
 gem 'currency_select'
+gem 'city-state'
+  gem 'json'
+  gem 'currency_converter'
+gem 'currencies', :require => 'iso4217'
+
 
 
 # gem 'bootstrap-sass'

@@ -11,9 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-        @states = CS.states(params[:country])
     @user = User.new(sign_up_params)
     @user.avatar = params[:user][:avatar]
+    puts @user.inspect
     if @user.save
       redirect_to new_user_session_path
     else
@@ -21,9 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render 'new'
     end
   end
- def build_resource(hash={})
-    super(hash.merge(ip_address: request.location))
-  end
+ 
   # GET /resource/edit
   # def edit
   #   super
@@ -52,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :address, :email, :password, :password_confirmation,:phone_number,:image,avatar: [:avatar_file_name, :avatar_content_type, :avatar_updated_at])
+    params.require(:user).permit(:first_name, :last_name, :address, :email, :password, :password_confirmation,:phone_number,:country,:state,:image,avatar: [:avatar_file_name, :avatar_content_type, :avatar_updated_at])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

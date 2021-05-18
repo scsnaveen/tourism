@@ -2,7 +2,16 @@
 <h1 center><%=@place.country%></h1>
 <h4><%=@place.place_name%></h4>
 <p><%=@place.place_description%></p>
+<%=select_tag CS.cities(current_user.country,current_user.state)%>
+<%=form_with(url: users_states_path, method: "get") do |form|%>
+	<div id="currency">
+		<%= form.select :city,CS.get(current_user.country,current_user.state) %>
+	</div>
 <button id="button1">calculate Distance</button>
+	
+		<p id="result"></p>
+		<p id="result1"></p>
+	<%end%>
 <p id="result"></p>
 
 </div>

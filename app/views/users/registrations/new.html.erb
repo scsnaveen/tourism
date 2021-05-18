@@ -45,17 +45,15 @@
 				<div class="field form-group">
 					<%= f.text_area :address,class:"form-control",placeholder:"Address"%>
 				</div>
-				<div class="field  form-group">
+				<div class="field  form-group" id="country">
 					<%= label_tag :country %>
-					<%= f.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } ) %>
+					<%= f.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } ),:class=>"country1" %>
 				</div>
 
-					<div class="field  form-group">
+					<div class="field  form-group" >
 						<%= label_tag :state %>
-						<%= f.text_field :state%>
+						<%= f.select :state, options_for_select([])%>
 					</div>
-
-					
 
 				<div class="field ">
 					<%=f.label :Profile_Pic%>
@@ -87,13 +85,19 @@ font-family: 'Numans', sans-serif;
 }
 </style>
 
-<!-- <script type="text/javascript">
-	$(document).on('ready page:load', function() {
-  return CountryStateSelect({
-    country_id: "country_id",
-    state_id: "state_id"
-  });
-});
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#country").change(function(){
+  	var country = $("#user_country").val()
+  console.log(country)
 
+    $.ajax({
+      url: "/states/index?country="+country,
+      type: "GET"
+    })
+  })
 
-</script> -->
+  })
+
+	
+</script>

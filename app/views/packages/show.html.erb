@@ -4,19 +4,19 @@
 					<li class="list-group-item"><b><%=place%></b></li>
 				<%end%>
 			</ul>
-<%=@package.price%>
+<button class="disable float-right">
+	$<%=@package.price%></button>
 <%=form_with(url: packages_conversion_path(:id=>@package.id), method: "post") do |form|%>
-	<div id="currency1">
-		<%= form.currency_select(:currency,["USD", "EUR", "CAD"], {}, {class: "form-control currency1"}) %>
+	<div id="currency">
+		<%= form.currency_select(:currency,["USD","INR", "EUR", "CAD"], {}, {class: "form-control currency1"}) %>
 	</div>
-		<p id=result></p>
-		<%=form.submit "conversion"%>
+		<p id="result"></p>
+		<p id="result1"></p>
 	<%end%>
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#currency').change(function() {
-		var state = $('.currency1').val();
 			$.ajax({
 				url: "conversion?id=<%=@package.id%>", 
 				type: 'GET',

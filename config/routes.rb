@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	put 'users/update_profile_pic'
 	get 'users/update_profile_pic'
 	get 'users/states'
+	get 'states/index'
 	resources :users do
 		member do
 			get :secure_image

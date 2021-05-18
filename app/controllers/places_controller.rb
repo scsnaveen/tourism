@@ -38,6 +38,8 @@ class PlacesController < ApplicationController
 	end
 	def show
 		@place= Place.find(params[:id])
+		puts CS.get(current_user.country,current_user.state).inspect
+
 	end
 
 	private
