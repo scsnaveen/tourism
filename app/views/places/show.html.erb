@@ -2,10 +2,9 @@
 	<h1><center><%=@place.country%></center></h1>
 	<h4><%=@place.place_name%></h4>
 	<p><%=@place.place_description%></p>
-	<button id="button1">calculate Distance</button>
 		<%=form_with(url: users_states_path, method: "get") do |form|%>
 			<div id="city1">
-				<%= form.select :city,CS.get(current_user.country,current_user.state) %>
+				<%= form.select :city,CS.get(current_user.country,current_user.state),{prompt: 'Select State...'} %>
 			</div>
 		<%end%>
 	<p id="result"></p>
@@ -13,21 +12,6 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$("#button1").click(function() {
-		$.ajax({    
-		type: "GET",
-		url: "distance",
-		dataType: "json",
-		data: {
-			"city1": "<%=current_user.country%>",
-			"city2": "<%=@place.country%>"
-		},
-		success: function(response){ 
-			var obj = JSON.stringify(response);
-			$("#result").html("<h3>The distance is "+obj+ "KM</h3>")
-			}
-		});
-	});
 	$("#city1").change(function(){
 		console.log($("#city").val())
 		var city1 = $("#city").val()

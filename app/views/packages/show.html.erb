@@ -10,7 +10,7 @@
 
 	<%=form_with(url: packages_conversion_path(:id=>@package.id), method: "post") do |form|%>
 		<div id="currency">
-			<%= form.currency_select(:currency, {}, {class: "currency1"}) %>
+			<%= form.currency_select(:currency, {},{prompt: 'Please select..'} ,{class: "currency1"}) %>
 		</div>
 		<p id=result></p>
 	<%end%>

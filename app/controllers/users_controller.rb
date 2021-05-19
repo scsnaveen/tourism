@@ -4,16 +4,18 @@ class UsersController < ApplicationController
 	# for updating profile pictures
 	def update_profile_pic
 		if request.put?
+			# checking if image is present
 			if params[:user][:avatar].present?
 				@user.avatar = params[:user][:avatar]
 			end
+			# checking if image is present
 			if params[:user][:image].present?
 				@user.image = params[:user][:image]
 			end
 			@user.save!
 		end
 	end
-	# displaying image securely
+	# displaying paperclip image
 	def secure_image
 		send_file current_user.avatar.path
 	end
