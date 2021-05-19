@@ -2,21 +2,25 @@ class PackagesController < ApplicationController
 	def new
 		@package =Package.new
 	end
+	# creation of package
 	def create
 		@package = Package.new(package_params)
 		@package.package_places = params[:package_places]
 		@package.save
 	end
+	# displaying index
 	def index
 		@packages=Package.all
 	end
+	# conversion of currency
 	def conversion
 		@package = Package.find(params[:id])
-		 @value =Concurrency.convert(@package.price,params[:currency] )
-			respond_to do |format|
-				format.json {render :json=>@value.round(2)}
-			end
+		@value =Concurrency.convert(@package.price,params[:currency] )
+		respond_to do |format|
+			format.json {render :json=>@value.round(2)}
+		end
 	end
+	# displaying the package details
 	def show
 		@package= Package.find(params[:id])
 	end

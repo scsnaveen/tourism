@@ -1,18 +1,20 @@
 <div class="container">
-<ul class="list-group">
-				<% @package.package_places.each do |place|%>
-					<li class="list-group-item"><b><%=place%></b></li>
-				<%end%>
-			</ul>
-<button class="disable float-right">
-	$<%=@package.price%></button>
-<%=form_with(url: packages_conversion_path(:id=>@package.id), method: "post") do |form|%>
-	<div id="currency">
-		<%= form.currency_select(:currency,["USD","INR", "EUR", "CAD"], {}, {class: "form-control currency1"}) %>
-	</div>
+
+	<ul class="list-group">
+		<% @package.package_places.each do |place|%>
+			<li class="list-group-item"><b><%=place%></b></li>
+		<%end%>
+	</ul>
+
+	<button class="disable float-right">$<%=@package.price%></button>
+
+	<%=form_with(url: packages_conversion_path(:id=>@package.id), method: "post") do |form|%>
+		<div id="currency">
+			<%= form.currency_select(:currency, {}, {class: "currency1"}) %>
+		</div>
 		<p id=result></p>
-		<p id="result1"></p>
 	<%end%>
+
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -21,15 +23,14 @@
 				url: "conversion?id=<%=@package.id%>", 
 				type: 'GET',
 				data: {
-					 "currency": $(".currency1").val()
-				 },
+					"currency": $(".currency1").val()
+				},
 				dataType: "json",
 				success: function(response){
 					var obj = JSON.stringify(response);
 					$("#result").html("<b>the conversion value is "+obj+"</b>")
 				}
-			 });
+			});
 		});
 	});
-	
 </script>
