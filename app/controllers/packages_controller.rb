@@ -15,7 +15,9 @@ class PackagesController < ApplicationController
 	# conversion of currency
 	def conversion
 		@package = Package.find(params[:id])
+		# conversion using concurrency gem from USD to selected currency 
 		@value =Concurrency.convert(@package.price,params[:currency] )
+		# sending response 
 		respond_to do |format|
 			format.json {render :json=>@value.round(2)}
 		end
