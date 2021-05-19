@@ -17,8 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.save
       redirect_to new_user_session_path
     else
-      flash[:errors] = @user.errors.full_messages
-      render 'new'
+      render :new
     end
   end
  

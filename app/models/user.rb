@@ -12,15 +12,12 @@ class User < ApplicationRecord
    validates :phone_number,numericality: { only_integer: true },presence: true,length: { minimum:6,maximum:10  }
    validates :country, presence: true
    validates :state, presence: true
+   validates :address,presence: true
       attr_accessor :avatar
 	 has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
-    validates_attachment :avatar, presence: true
    do_not_validate_attachment_file_type :avatar
-   def picture_from_url(url)
-    self.avatar = URI.parse(url).open
-  end
-  geocoded_by :ip_address,:latitude => :lat, :longitude => :lon
-	after_validation :geocode
+ #  geocoded_by :ip_address,:latitude => :lat, :longitude => :lon
+	# after_validation :geocode
   
 
 

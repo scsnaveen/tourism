@@ -2,15 +2,13 @@
 <h1 center><%=@place.country%></h1>
 <h4><%=@place.place_name%></h4>
 <p><%=@place.place_description%></p>
-<%=select_tag CS.cities(current_user.country,current_user.state)%>
+<%#=select_tag(:city,CS.cities(current_user.country,current_user.state))%>
+<button id="button1">calculate Distance</button>
 <%=form_with(url: users_states_path, method: "get") do |form|%>
-	<div id="currency">
+	<div id="city1">
 		<%= form.select :city,CS.get(current_user.country,current_user.state) %>
 	</div>
-<button id="button1">calculate Distance</button>
-	
-		<p id="result"></p>
-		<p id="result1"></p>
+
 	<%end%>
 <p id="result"></p>
 
@@ -23,12 +21,33 @@ $(document).ready(function() {
 		type: "GET",
 		url: "distance",
 		dataType: "json",
-		data: {"city2": "<%=@place.country%>"},
+		data: {
+			"city1": "<%=current_user.country%>",
+			"city2": "<%=@place.country%>"
+		},
 		success: function(response){ 
 			var obj = JSON.stringify(response);
 			$("#result").html("<h3>The distance is "+obj+ "KM</h3>")
-		}
+			}
+		});
+	});
+	$("#city1").change(function(){
+		console.log($("#city").val())
+		var city1 = $("#city").val()
+		console.log(city1)
+		$.ajax({
+			url: "distance?city1="+city1, 
+			type: 'GET',
+			data: {
+				 "city1": $("#city").val(),
+				 "city2":"<%=@place.country%>"
+			 },
+			dataType: "json",
+			success: function(response){
+				var obj = JSON.stringify(response);
+				$("#result").html("<b>the conversion value is "+obj+"</b>")
+			}
+		});
 	});
 });
- });
 </script>

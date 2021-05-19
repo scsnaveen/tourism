@@ -4,8 +4,12 @@
 <div class="row">
 	<div class="col-3">
 		<h3>update profile pic 1</h3>
+		<%if @user.image.present?%>
 		<%= link_to image_tag(@user.image,style: "width: 250px; display: block",class: 'media-object'),@user.image, target: '_blank',method: :get%>
 		<%= f.file_field :image%>
+		<%else%>
+		<%= f.file_field :image%>
+		<%end%>
 	</div>
 	<div class="col-3">
 		<h3>update profile pic 2</h3>
@@ -24,12 +28,3 @@
 <%= f.submit "submit",class: "btn btn-success"%>
 </div>
 <%end%>
-<script type="text/javascript">
-	$(document).on('ready page:load', function() {
-  return CountryStateSelect({
-    country_id: "first_name",
-    state_id: "last_name"
-  });
-});
-</script>
-

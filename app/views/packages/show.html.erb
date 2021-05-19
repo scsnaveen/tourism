@@ -10,7 +10,7 @@
 	<div id="currency">
 		<%= form.currency_select(:currency,["USD","INR", "EUR", "CAD"], {}, {class: "form-control currency1"}) %>
 	</div>
-		<p id="result"></p>
+		<p id=result></p>
 		<p id="result1"></p>
 	<%end%>
 </div>
@@ -26,7 +26,7 @@
 				dataType: "json",
 				success: function(response){
 					var obj = JSON.stringify(response);
-					$("#result").html("<b>the conversion value is </b>"+obj)
+					$("#result").html("<b>the conversion value is "+obj+"</b>")
 				}
 			 });
 		});

@@ -14,7 +14,7 @@ class PackagesController < ApplicationController
 		@package = Package.find(params[:id])
 		 @value =Concurrency.convert(@package.price,params[:currency] )
 			respond_to do |format|
-				format.json {render :json=>@value}
+				format.json {render :json=>@value.round(2)}
 			end
 	end
 	def show
